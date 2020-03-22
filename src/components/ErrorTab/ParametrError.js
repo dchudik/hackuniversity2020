@@ -64,11 +64,11 @@ export const SimplePaper = (props) => {
                 <form className={classes.root} noValidate autoComplete="off">
                     <span className={classes.field}>
                         <Typography variant={"subtitle1"} className={classes.label} component={"span"}>Минимальное значение: </Typography>
-                        <TextField id="standard-basic"  value={criticalsData.min} onChange={(event)=>{setMin(event.target.value)}}/>
+                        <TextField id="standard-basic"  label={criticalsData.min.toString()} onChange={(event)=>{setMin(event.target.value)}}/>
                     </span>
                     <span className={classes.field}>
                         <Typography variant={"subtitle1"} className={classes.label} component={"span"}>Максимальное значение: </Typography>
-                        <TextField id="standard-basic"  value={criticalsData.max} onChange={(event)=>{setMax(event.target.value)}}/>
+                        <TextField id="standard-basic"  label={criticalsData.max.toString()} onChange={(event)=>{setMax(event.target.value)}}/>
                     </span>
                     <Button className={classes.button} onClick={sendSetData}>Установить</Button>
                 </form>

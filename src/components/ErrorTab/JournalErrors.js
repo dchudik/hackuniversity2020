@@ -31,6 +31,9 @@ export default function SimplePaper() {
         const json = await res.data;
         console.log(json);
         setDataErrors(json.errors);
+    };
+    const viewDateTime = (datetime) => {
+        return datetime.split("T")[0] + " " + datetime.split("T")[1].split("Z")[0];
     }
     useEffect( ()=>{
         getErrorsFetch();
@@ -51,7 +54,7 @@ export default function SimplePaper() {
                         {dataErrors.map((row, index) => (
                             <TableRow key={index}>
                                 <TableCell component="th" scope="row">
-                                    {row.dateTime}
+                                    {viewDateTime(row.dateTime)}
                                 </TableCell>
                                 <TableCell align="right">{row.paramName}</TableCell>
                                 <TableCell align="right">{row.paramValue}</TableCell>

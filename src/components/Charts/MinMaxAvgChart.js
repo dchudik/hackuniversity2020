@@ -1,7 +1,8 @@
 import React, { PureComponent, useEffect, useState } from 'react';
 import {URL} from '../../redux/axios/config';
 import axios from 'axios';
-
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import {
   BarChart,
   Bar,
@@ -14,8 +15,20 @@ import {
 } from 'recharts'
 import SelectParam from './SelectPram';
 
-
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+    margin: '8px'
+  },
+}));
 export default function MinMaxAvg(props) {
+  const classes = useStyles();
   const jsfiddleUrl = 'https://jsfiddle.net/alidingling/30763kr7/'
   const [dataParam, setDataParam] = useState("PRESSURE");
   const [dataForChart, setDataForChart] = useState([])
@@ -24,6 +37,11 @@ export default function MinMaxAvg(props) {
     console.log(event.target.value);
     getDataWithFetch(event.target.value);
   }
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
   const getDataWithFetch = async (param) => {
     const data = [
       {
@@ -48,7 +66,21 @@ export default function MinMaxAvg(props) {
         if(dataForChart.length>0)
         return (
         <div>
-          <p><SelectParam  data={dataParam} setData={(event)=>setData(event)}/>Данные за сегодня:</p>
+          <p>
+            <p style={{display:'flex'}}>
+              <SelectParam  data={dataParam} setData={(event)=>setData(event)}/>
+              <TextField
+                  id="date"
+                  label="Дата"
+                  type="date"
+                  defaultValue="2020-03-22"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+              />
+            </p>
+            Данные за сегодня:</p>
       <BarChart
         width={500}
         height={300}

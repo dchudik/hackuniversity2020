@@ -16,14 +16,14 @@ export default function Variants() {
         let connection = new WebSocket(WSS);
         console.log("Connect success");
         connection.onmessage = evt => {
-            
+
             setDatas(evt.data);
         }
     }, []);
     const getDataByParam = (param)=>{
         if(datas !== "") {
             const json = JSON.parse(datas);
-            console.log(json);
+
             return json[param];
         }
     }

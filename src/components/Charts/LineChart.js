@@ -5,6 +5,8 @@ import {
 import SelectParam from './SelectPram';
 import {URL} from "../../redux/axios/config";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import {makeStyles} from "@material-ui/core/styles";
 const data = [
   {
     time: '1AM', data: 4000
@@ -28,8 +30,20 @@ const data = [
     time: '10PM', data: 3490
   },
 ];
-
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+    margin: '8px'
+  },
+}));
 export default function LineChartComponent(props) {
+  const classes = useStyles();
   const jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
   const [dataParam, setDataParam] = useState("PRESSURE");
   const [dataForChart, setDataForChart] = useState([])
@@ -45,7 +59,8 @@ export default function LineChartComponent(props) {
     const res = await axios.get(URL+"/hourly?param="+param+"&dateStart=today")
     const json = await res.data;
     const arrayObjects = json.data.map((data,index)=>{
-      return {"time":index, "data":data}
+      if(data !== 0)
+          return {"time":index, "data":data}
     })
     data = arrayObjects;
 
@@ -57,7 +72,20 @@ export default function LineChartComponent(props) {
   },[]);
         {if(dataForChart.length>0) return(
         <div>
-          <p><SelectParam data={dataParam} setData={(event)=>setData(event)}/>График изменения параметра по часам:</p>
+          <p>
+            <p style={{display:'flex'}}>
+            <SelectParam data={dataParam} setData={(event)=>setData(event)}/>
+              <TextField
+                  id="date"
+                  label="Дата"
+                  type="date"
+                  defaultValue="2020-03-22"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+              />
+            </p>График изменения параметра по часам за сегодня:</p>
       <LineChart
         width={500}
         height={300}

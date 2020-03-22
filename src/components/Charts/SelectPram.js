@@ -23,6 +23,7 @@ export default function ControlledOpenSelect(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleChange = event => {
+    console.log(event.target.value);
     setAge(event.target.value);
     props.setData(event);
   };
@@ -45,7 +46,7 @@ export default function ControlledOpenSelect(props) {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
+          value={props.data}
           onChange={handleChange}
         >
           <MenuItem value={"PRESSURE"}>Давление</MenuItem>
