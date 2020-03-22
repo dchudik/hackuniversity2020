@@ -9,7 +9,7 @@ export const GetCriticalFetch = () => {
 }
 export const SetCriticalFetch = (param, min, max) => {
     let data = null;
-    let request = {param, min, max};
+    let request = {param, min, max, author:"frontend"};
     console.log(request);
     axios.post(URL+"/critical",
         JSON.stringify(request)
