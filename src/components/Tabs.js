@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import DisplayData from './DisplayData';
 import ErrorTab from './ErrorTab';
+import Charts from './Charts';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -70,7 +71,7 @@ export default function SimpleTabs() {
                 <ErrorTab />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <Charts />
             </TabPanel>
         </div>
     );

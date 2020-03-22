@@ -16,8 +16,8 @@ export default function Variants() {
         let connection = new WebSocket(WSS);
         console.log("Connect success");
         connection.onmessage = evt => {
+            
             setDatas(evt.data);
-            console.log(evt.data);
         }
     }, []);
     const getDataByParam = (param)=>{

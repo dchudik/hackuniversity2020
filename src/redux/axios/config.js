@@ -1,2 +1,2 @@
-export const URL = "http://72550e6e.ngrok.io"
-export const WSS = "ws://185.251.90.101:8080"
+export const URL = "http://192.168.1.105:5000"
+export const WSS = "ws://192.168.1.109:8080"
